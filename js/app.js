@@ -15,28 +15,41 @@ class UI {
 		this.itemList = [];
 		this.itemID = 0;
 	}
+	// Submit budget method
+	submitBudgetForm() {
+		const budgetInputValue = this.budgetInput.value;
+		if (budgetInputValue != "" && budgetInputValue > 0) {
+			console.log(`Your budget for this month is ${budgetInputValue}`);
+		} else {
+			this.budgetFeedback.classList.add("showItem");
+			this.budgetFeedback.innerHTML = "<p>Please enter a valid number...</p>";
+
+			const self = this;
+
+			setTimeout(function() {
+				self.budgetFeedback.classList.remove("showItem");
+			}, 4000);
+		}
+	}
 }
 
 function eventListeners() {
-	const budgetForm = document.getElementById("budget-form");
-	const expenseForm = document.getElementById("expense-form");
-	const expenseList = document.getElementById("expense-list");
-
 	// new instance of UI Class
 	const ui = new UI();
 
 	// Budget form submit
-	budgetForm.addEventListener("submit", function(event) {
+	ui.budgetForm.addEventListener("submit", function(event) {
 		event.preventDefault();
+		ui.submitBudgetForm();
 	});
 
 	// Expense form submit
-	expenseForm.addEventListener("submit", function(event) {
+	ui.expenseForm.addEventListener("submit", function(event) {
 		event.preventDefault();
 	});
 
 	// Expense list click submit
-	expenseLis.addEventListener("click", function() {});
+	ui.expenseList.addEventListener("click", function() {});
 }
 
 document.addEventListener("DOMContentLoaded", function() {
